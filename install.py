@@ -55,7 +55,7 @@ with _REQUIREMENT_PATH.open() as fp:
                     continue
 
                 launch.run_pip(
-                    f"install -U {requirement}",
+                    f"install -U {name}=={version}",
                     f"sd-webui-facefusion requirement: changing {name} version from {installed_version} to {version}",
                 )
                 continue
