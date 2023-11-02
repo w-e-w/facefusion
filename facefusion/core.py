@@ -15,7 +15,7 @@ from argparse import ArgumentParser, HelpFormatter
 import facefusion.choices
 import facefusion.globals
 from facefusion import metadata, wording
-from facefusion.predictor import predict_image, predict_video
+# from facefusion.predictor import predict_image, predict_video
 from facefusion.processors.frame.core import get_frame_processors_modules, load_frame_processor_module
 from facefusion.utilities import is_image, is_video, detect_fps, compress_image, merge_video, extract_frames, get_temp_frame_paths, restore_audio, create_temp, move_temp, clear_temp, list_module_names, encode_execution_providers, decode_execution_providers, normalize_output_path
 
@@ -193,8 +193,8 @@ def conditional_process() -> None:
 
 
 def process_image() -> None:
-	if predict_image(facefusion.globals.target_path):
-		return
+	# if predict_image(facefusion.globals.target_path):
+	# 	return
 	shutil.copy2(facefusion.globals.target_path, facefusion.globals.output_path)
 	# process frame
 	for frame_processor_module in get_frame_processors_modules(facefusion.globals.frame_processors):
@@ -213,8 +213,8 @@ def process_image() -> None:
 
 
 def process_video() -> None:
-	if predict_video(facefusion.globals.target_path):
-		return
+	# if predict_video(facefusion.globals.target_path):
+	# 	return
 	fps = detect_fps(facefusion.globals.target_path) if facefusion.globals.keep_fps else 25.0
 	# create temp
 	update_status(wording.get('creating_temp'))
