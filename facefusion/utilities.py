@@ -115,7 +115,8 @@ def get_temp_directory_path(target_path : str) -> str:
 
 def get_temp_output_video_path(target_path : str) -> str:
 	temp_directory_path = get_temp_directory_path(target_path)
-	return os.path.join(temp_directory_path, TEMP_OUTPUT_VIDEO_NAME)
+	ext = os.path.splitext(target_path)[1]
+	return os.path.join(temp_directory_path, f'temp{ext}')
 
 
 def normalize_output_path(source_path : Optional[str], target_path : Optional[str], output_path : Optional[str]) -> Optional[str]:
