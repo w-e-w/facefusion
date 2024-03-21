@@ -40,9 +40,9 @@ def get_argument_parser():
 	group_misc.add_argument('--headless', help = wording.get('headless_help'), dest = 'headless', action = 'store_true')
 	# execution
 	group_execution = program.add_argument_group('execution')
-	group_execution.add_argument('--execution-providers', help = wording.get('execution_providers_help').format(choices = 'cpu'), dest = 'execution_providers', default = [ 'cpu' ], choices = encode_execution_providers(onnxruntime.get_available_providers()), nargs = '+')
-	group_execution.add_argument('--execution-thread-count', help = wording.get('execution_thread_count_help'), dest = 'execution_thread_count', type = int, default = 1)
-	group_execution.add_argument('--execution-queue-count', help = wording.get('execution_queue_count_help'), dest = 'execution_queue_count', type = int, default = 1)
+	group_execution.add_argument('--execution-providers', help = wording.get('execution_providers_help').format(choices = 'cuda'), dest = 'execution_providers', default = [ 'cpu' ], choices = encode_execution_providers(onnxruntime.get_available_providers()), nargs = '+')
+	group_execution.add_argument('--execution-thread-count', help = wording.get('execution_thread_count_help'), dest = 'execution_thread_count', type = int, default = 32)
+	group_execution.add_argument('--execution-queue-count', help = wording.get('execution_queue_count_help'), dest = 'execution_queue_count', type = int, default = 8)
 	group_execution.add_argument('--max-memory', help=wording.get('max_memory_help'), dest='max_memory', type = int)
 	# face recognition
 	group_face_recognition = program.add_argument_group('face recognition')
@@ -63,9 +63,9 @@ def get_argument_parser():
 	# output creation
 	group_output = program.add_argument_group('output creation')
 	group_output.add_argument('--output-image-quality', help=wording.get('output_image_quality_help'), dest = 'output_image_quality', type = int, default = 80, choices = range(101), metavar = '[0-100]')
-	group_output.add_argument('--output-video-encoder', help = wording.get('output_video_encoder_help'), dest = 'output_video_encoder', default = 'libx264', choices = facefusion.choices.output_video_encoders)
+	group_output.add_argument('--output-video-encoder', help = wording.get('output_video_encoder_help'), dest = 'output_video_encoder', default = 'h264_nvenc', choices = facefusion.choices.output_video_encoders)
 	group_output.add_argument('--output-video-quality', help = wording.get('output_video_quality_help'), dest = 'output_video_quality', type = int, default = 80, choices = range(101), metavar = '[0-100]')
-	group_output.add_argument('--keep-fps', help = wording.get('keep_fps_help'), dest = 'keep_fps', action = 'store_true')
+	group_output.add_argument('--keep-fps', help = wording.get('keep_fps_help'), dest = 'keep_fps', action = 'store_true', default = True)
 	group_output.add_argument('--skip-audio', help = wording.get('skip_audio_help'), dest = 'skip_audio', action = 'store_true')
 	# frame processors
 	available_frame_processors = list_module_names('facefusion/processors/frame/modules')
