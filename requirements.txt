@@ -1,3 +1,4 @@
+albumentations==1.4.3
 insightface>=0.7.3
 onnx>=1.14.1
 opennsfw2>=0.10.2
