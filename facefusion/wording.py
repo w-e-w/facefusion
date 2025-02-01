@@ -225,7 +225,14 @@ WORDING : Dict[str, Any] =\
 		'job_run': 'run a queued job',
 		'job_run_all': 'run all queued jobs',
 		'job_retry': 'retry a failed job',
-		'job_retry_all': 'retry all failed jobs'
+		'job_retry_all': 'retry all failed jobs',
+		# account
+		'create_account': 'create an account',
+		'delete_account': 'delete an account',
+		'login': 'login to an account',
+		'logout': 'logout from an account',
+		'reset_password': 'reset the password',
+		'verify_action': 'verify the action'
 	},
 	'about':
 	{

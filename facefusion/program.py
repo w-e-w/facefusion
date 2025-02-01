@@ -273,6 +273,24 @@ def collect_job_program() -> ArgumentParser:
 	return ArgumentParser(parents = [ create_execution_program(), create_download_providers_program(), create_memory_program(), create_log_level_program() ], add_help = False)
 
 
+def create_account_email_program() -> ArgumentParser:
+	program = ArgumentParser(add_help = False)
+	program.add_argument('account_email', help = wording.get('help.account_email'))
+	return program
+
+
+def create_account_password_program() -> ArgumentParser:
+	program = ArgumentParser(add_help = False)
+	program.add_argument('account_password', help = wording.get('help.account_password'))
+	return program
+
+
+def create_verify_code_program() -> ArgumentParser:
+	program = ArgumentParser(add_help = False)
+	program.add_argument('verify_code', help = wording.get('help.verify_code'))
+	return program
+
+
 def create_program() -> ArgumentParser:
 	program = ArgumentParser(formatter_class = create_help_formatter_large, add_help = False)
 	program._positionals.title = 'commands'
@@ -299,6 +317,15 @@ def create_program() -> ArgumentParser:
 	sub_program.add_parser('job-run-all', help = wording.get('help.job_run_all'), parents = [ create_config_path_program(), create_temp_path_program(), create_jobs_path_program(), collect_job_program(), create_halt_on_error_program() ], formatter_class = create_help_formatter_large)
 	sub_program.add_parser('job-retry', help = wording.get('help.job_retry'), parents = [ create_job_id_program(), create_config_path_program(), create_temp_path_program(), create_jobs_path_program(), collect_job_program() ], formatter_class = create_help_formatter_large)
 	sub_program.add_parser('job-retry-all', help = wording.get('help.job_retry_all'), parents = [ create_config_path_program(), create_temp_path_program(), create_jobs_path_program(), collect_job_program(), create_halt_on_error_program() ], formatter_class = create_help_formatter_large)
+	# account
+	sub_program.add_parser('account-login', help = wording.get('help.login'), parents = [ create_account_email_program(), create_account_password_program() ], formatter_class = create_help_formatter_large)
+	sub_program.add_parser('account-logout', help = wording.get('help.logout'), formatter_class = create_help_formatter_large)
+	sub_program.add_parser('account-create', help = wording.get('help.create_account'), parents = [ create_account_email_program(), create_account_password_program() ], formatter_class = create_help_formatter_large)
+	sub_program.add_parser('account-verify-create', help = wording.get('help.verify_account'), parents = [ create_verify_code_program(), create_account_email_program() ], formatter_class = create_help_formatter_large)
+	sub_program.add_parser('account-delete', help = wording.get('help.delete_account'), parents = [ create_account_email_program(), create_account_password_program() ], formatter_class = create_help_formatter_large)
+	sub_program.add_parser('account-verify-delete', help = wording.get('help.delete_account'), parents = [ create_verify_code_program(), create_account_email_program() ], formatter_class = create_help_formatter_large)
+	sub_program.add_parser('account-password-reset', help = wording.get('help.reset_password'), parents = [ create_account_email_program() ], formatter_class = create_help_formatter_large)
+	sub_program.add_parser('account-password-change', help = wording.get('help.change_password'), parents = [ create_verify_code_program(), create_account_password_program() ], formatter_class = create_help_formatter_large)
 	return ArgumentParser(parents = [ program ], formatter_class = create_help_formatter_small)
 
 
